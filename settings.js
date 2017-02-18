@@ -1,6 +1,6 @@
 module.exports = {
     cookieSecret:'dzy',
-    db: 'blog',
+    db: 'timetrip',
     host:'localhost',
     port:27017
 }

@@ -1,13 +1,16 @@
 var express = require('express');
 var router = express.Router();
+console.log('index');
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-router.post('/signin', function(req, res, next) {
-  console.log(req.data);
-  res.send({success: true, data:{name: 'zhangsan'}})
+router.get('/home', function(req, res, next) {
+  var user = req.session.user;
+  console.log(user);
+  if(user) {
+    res.send({success: true, data:user});
+  }
+  res.send({success:false, data:user});
 })
+
+
 
 module.exports = router;
