@@ -19,6 +19,7 @@ router.post('/signin', function(req, res, next) {
     }
     if(user) {
       res.send({success: false, message: '用户名已存在', data:null});
+      return;
     }
     newUser.save(function(err, db) {
       if(err) {
@@ -30,15 +31,23 @@ router.post('/signin', function(req, res, next) {
 })
 
 router.post('/login', function(req, res, next) {
+  if(!req.body.name || !req.body.password) {
+    console.log('用户名或密码不能为空')
+    res.send({success:false, message:'用户名或密码不能为空', data:null});
+    return;
+  }
+  console.log('继续执行')
   User.get(req.body.name, function(err, user) {
     if(err) {
       res.send({success: false, message:'服务器出错', data:null});
+      return;
     }
     if(req.body.password == user.password) {
       req.session.user = user;
       res.send({success: true, message: '登录成功', data: user});
     }else{
       res.send({success: false, message:'用户名或密码错误', data:null});
+      return;
     }
   })
 })
