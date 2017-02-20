@@ -31,6 +31,9 @@ timetrip.controller('indexCtrl', function($scope, $http) {
 })
 
 timetrip.controller('login', function($scope,$http) {
+    $scope.errorBye = function() {
+        $scope.word = ''
+    }
     // 登录
     $scope.login = function() {
         $http({
@@ -40,6 +43,7 @@ timetrip.controller('login', function($scope,$http) {
         }).success(function(data) {
             if(!data.success) {
                 console.log('登录失败');
+                $scope.word = data.message;
             }else{
                 console.log('登录成功');
                 // 给同级发送通知
@@ -55,6 +59,9 @@ timetrip.controller('login', function($scope,$http) {
 })
 // 注册
 timetrip.controller('signin', function($scope,$http) {
+    $scope.errorBye = function() {
+        $scope.word = ''
+    }
     $scope.formData = {};
     $scope.signin = function() {
         $http({
@@ -66,19 +73,23 @@ timetrip.controller('signin', function($scope,$http) {
             console.log(data);
             if(!data.success){
                 console.log('失败')
-                //当前注册失败
-                // if(!data.errors){
-                //     //用户名密码错误
-                //     $scope.message = data.message;
-                // }else{
-                //     //用户名，密码为空的错误
-                //     $scope.errorUsername = data.errors.username;
-                //     $scope.errorPassword = data.errors.password;
-                // }
+                $scope.word = data.message;
             }else{
                 console.log(data)
                 //注册成功
                 window.location.href='#/login';
+            }
+        })
+    }
+    $scope.change = function() {
+        $http({
+            method:'POST',
+            url:'/users/name/',
+            data: $scope.formData
+        }).success(function(data) {
+            console.log(data);
+            if(!data.success) {
+                console.log(data.message);
             }
         })
     }

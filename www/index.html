@@ -35,11 +35,10 @@
 <body class="container" ng-controller="indexCtrl">
     <section></section>
     <nav>
-        
-        <a ui-sref="login">登录</a>
-        <a ui-sref="login">{{name}}</a>
-        <a ui-sref="signin">注册</a>
-        <a ng-click="logout()">登出</a>
+        <a ng-hide="name" ui-sref="signin">注册</a>
+        <a ng-show="name" ng-click="logout()">登出</a>
+        <a ng-hide="name" ui-sref="login">登录</a>
+        <a ng-show="name" ui-sref="login">{{name}}</a>
     </nav>
     <div class="logo">
         <a ui-sref="home"><img src="image/logo.png" alt=""></a>
