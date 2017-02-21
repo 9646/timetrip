@@ -1,9 +1,6 @@
 //上面登录注册的控制器
 timetrip.controller('indexCtrl', function($scope, $http) {
     $scope.$on('login', function(d, data) {
-        console.log('收到通知');
-        console.log(data)
-        console.log(data.name)
         $scope.name = data.name;
     })
     $http({
@@ -184,7 +181,6 @@ timetrip.controller('message', function($scope,$http) {
         var data = {};
         data.name = $scope.name;
         data.message = $scope.message;
-        console.log(data);
         $http({
             method:'POST',
             url:'/mess', 
@@ -211,22 +207,18 @@ timetrip.controller('message', function($scope,$http) {
         data.messageId = id;
         data.reply = document.querySelector('.a' + id).value;
         data.name = $scope.name;
-        console.log(data);
         $http({
             method:'POST',
             url: '/addReply',
             data: data
         }).success(function(data) {
-                console.log(data)
             if(data.success) {
                 $http({
                     method: 'GET',
                     url: '/messages'
                 }).success(function(data) {
                     if(!data.success) {
-                        console.log(data.message);
                     }else{
-                        console.log(data.data)
                         $scope.messages = data.data;
                     }
                 })
@@ -239,13 +231,11 @@ timetrip.controller('message', function($scope,$http) {
         var messageId = id;
         var data = {};
         data.messageId = id;
-        console.log(messageId);
         $http({
             method: 'POST',
             url: '/delMessage',
             data: data
         }).success(function(data) {
-            console.log(data);
             if(data.success) {
                 load();
             }

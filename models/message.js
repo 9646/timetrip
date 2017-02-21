@@ -47,7 +47,6 @@ message.getAll = function(callback) {
 
 message.addReply = function(data, callback) {
 
-    console.log(data)
     mongodb.open(function(err, db) {
         if(err) {
             return callback(err);
@@ -69,8 +68,6 @@ message.addReply = function(data, callback) {
 }
 
 message.delMessage = function(messageId, callback) {
-    console.log('--------------')
-    console.log(messageId);
     mongodb.open(function(err,db) {
         if(err) {
             return callback(err);

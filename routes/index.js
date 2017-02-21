@@ -2,11 +2,9 @@ var express = require('express');
 var time = require('../utilities');
 var message = require('../models/message');
 var router = express.Router();
-console.log('index');
 
 router.get('/home', function(req, res, next) {
   var user = req.session.user;
-  console.log(user);
   if(user) {
     return res.send({success: true, data:user});
   }
@@ -22,7 +20,6 @@ router.post('/mess', function(req, res) {
   data.name = req.body.name;
   data.time = time(new Date());
   data.answers = [];
-  console.log(data);
   message.save(data, function(err, message) {
     if(err) {
       return res.send({success: false, message:'留言失败', data:null});
@@ -53,7 +50,6 @@ router.post('/addReply', function(req, res) {
 })
 
 router.post('/delMessage', function(req, res) {
-  console.log(req.body);
   message.delMessage(req.body.messageId, function(err) {
     if(err) {
       return res.send({success: false, message:'删除失败', data: null});
