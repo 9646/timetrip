@@ -1,7 +1,9 @@
 * {
     border-style: none;
-    color: white;
     font-size: 16px;
+}
+input {
+    color: white;
 }
 ul {
     list-style: none;
@@ -9,7 +11,9 @@ ul {
 p {
     margin: 0;
 }
-
+textarea{
+    color: white;
+}
 a, name{
     color: #19B1F5;   
     cursor: pointer; 
@@ -17,6 +21,7 @@ a, name{
 body{
     font-family:'Microsoft YaHei';
     background-color: #000000;
+    color: white;
     /*background-image: linear-gradient(to bottom, #000, #222, #000);*/
 }
 
@@ -169,4 +174,36 @@ main {
 
 .message hr {
     border-color: #333;
+}
+
+/*博客页面*/
+/*添加博客*/
+.addblog section {
+    padding: 10px 10px;
+    background-color: #cfbaaa;
+    border: solid 2px sandybrown;
+    border-radius: 5px;
+
+}
+.addblog input{
+        /*width: 100px;*/
+    border: solid 1px gray;
+    border-radius: 3px;
+    background-color: #1A1A1A;    
+    box-sizing: border-box
+}
+
+.addblog input[name='title'] {
+    color: sandybrown;
+    display: block;
+    width: 80%;
+    padding: 3px 20px;
+    margin: 10px auto;
+    font-size: 24px;
+    text-align: center;
+}
+.addblog input[type="submit"], .addblog input[type="reset"]{
+    padding: 3px 10px;
+    margin-top: 10px;
+    font-size: 20px;
 }

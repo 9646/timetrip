@@ -129,13 +129,43 @@ timetrip.controller('blogs', function($scope,$http) {
 })
 
 timetrip.controller('blog', function($scope,$http) {
-    console.log('博客')
+    console.log('博客');
 })
 
 timetrip.controller('addblog', function($scope,$http) {
     console.log('添加博客')
+    $http({
+        method:'GET',
+        url: '/home'
+    }).success(function(data) {
+        if(data.success) {
+            $scope.name = data.data.name;
+        }else{
+            $scope.name = ''
+        }
+        console.log($scope.name);
+    });
+    
+    $scope.addblog = function() {
+        var data = {};
+        data.name = $scope.name;
+        data.type = 'blog';
+        data.blog = {};
+        data.blog.content = editor.html();
+        data.blog.title = $scope.title
+        $http({
+            method: 'POST',
+            url:'/blogs/addblog',
+            data: data
+        }).success(function(data) {
+            if(data.success) {
+                console.log(data);
+            }
+        })
+    }
 })
 
+// 留言功能 
 timetrip.controller('message', function($scope,$http) {
     console.log('留言板')
     function load() {
@@ -152,31 +182,17 @@ timetrip.controller('message', function($scope,$http) {
         })
     }
     load()
-
-        $http({
-            method:'GET',
-            url: '/home'
-        }).success(function(data) {
-            if(data.success) {
-                $scope.name = data.data.name;
-            }else{
-                $scope.name = ''
-            }
-            console.log($scope.name);
-        });
-
     $http({
-        method: 'GET',
-        url: '/messages'
+        method:'GET',
+        url: '/home'
     }).success(function(data) {
-        if(!data.success) {
-            console.log(data.message);
+        if(data.success) {
+            $scope.name = data.data.name;
         }else{
-            console.log(data.data)
-            $scope.messages = data.data;
+            $scope.name = ''
         }
-    })
-
+        console.log($scope.name);
+    });
     $scope.postMessage = function() {
         var data = {};
         data.name = $scope.name;
@@ -186,17 +202,7 @@ timetrip.controller('message', function($scope,$http) {
             url:'/mess', 
             data: data
         }).success(function(data) {
-            $http({
-                method: 'GET',
-                url: '/messages'
-            }).success(function(data) {
-                if(!data.success) {
-                    console.log(data.message);
-                }else{
-                    console.log(data.data)
-                    $scope.messages = data.data;
-                }
-            })
+            load();
         })
         $scope.message = ''
     }
@@ -213,15 +219,7 @@ timetrip.controller('message', function($scope,$http) {
             data: data
         }).success(function(data) {
             if(data.success) {
-                $http({
-                    method: 'GET',
-                    url: '/messages'
-                }).success(function(data) {
-                    if(!data.success) {
-                    }else{
-                        $scope.messages = data.data;
-                    }
-                })
+                load();
             }
         })
         document.querySelector('.a' + id).value = ''

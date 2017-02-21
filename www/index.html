@@ -2,6 +2,15 @@
 <!--在整个页面当中，注册一个模块,通过 ng-app来启动模块-->
 <html ng-app="timetrip">
 <head>
+    <link rel="stylesheet" href="kindeditor-4.1.10/themes/default/default.css" />
+    <script charset="utf-8" src="kindeditor-4.1.10/kindeditor-min.js"></script>
+    <script charset="utf-8" src="kindeditor-4.1.10/lang/zh_CN.js"></script>
+    <script>
+        var editor;
+        KindEditor.ready(function(K) {
+        });
+    </script>
+
     <meta charset="UTF-8">
     <title>时间之旅</title>
     <!--bootstrap CSS文件-->
