@@ -1,6 +1,25 @@
 <div class="home" ng-controller="home">
-    主页
-    <button ng-click="add()">
-        主页
-    </button>
+    <section>
+        <form>
+            <textarea ng-model="mood" cols="30" rows="2" autofocus style="resize:none" placeholder="随便说点什么"></textarea>
+            <input type="submit" value="签到">
+    </form>
+    </section>
+    <section>
+        <ul>
+            <li>
+                <time>2016年1月</time>
+                <div>
+                    <div>
+                        <p>说的话</p>
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <span>评论</span>
+                        <span>点赞</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
 </div>

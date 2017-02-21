@@ -1,6 +1,6 @@
 <div class="signin" ng-controller="signin">
     <section>
-        <div id="message" class="word" ng-show="word" >{{word}}</div>
+        <div id="message" class="errorbox" ng-show="word" >{{word}}</div>
         <div class="form">
             <form name="form" ng-submit="signin()">
                 <input type="text" ng-change="change()" ng-click="errorBye()" ng-model="formData.name" required autofocus placeholder="请输入用户名"><br>

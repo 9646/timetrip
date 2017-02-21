@@ -1,3 +1,42 @@
 <div class="message" ng-controller="message">
-    留言
+    <section>
+        <div id="message" class="successbox" ng-show="success" >{{word}}</div>
+        <div id="message" class="successbox" ng-show="success" >{{word}}</div>
+        <form name="form" ng-submit="postMessage()">
+            <textarea ng-model="message" placeholder="留言" required id="" cols="30" rows="2" style="resize:none"></textarea>
+            <input type="submit" value="留言">
+        </form>
+    </section>
+    <section>
+        <ul class="replyUl">
+            <li class="replyLi" ng-repeat="item in messages">
+                <div>
+                    <name>{{item.name}}</name> <span>给你留言:</span>
+                    <p>{{item.message}}</p>
+                    <time>{{item.time.day}} {{item.time.minute}}</time>
+                    <a class="delete" ng-show="name == '邓志阳'" ng-click="delMessage(item._id)">删除</a>
+                    <br>
+                    <hr>
+                    <div ng-show="item.answers">
+                        <ul>
+                            <li ng-repeat="li in item.answers">
+                                <name>{{li.name}}</name> <span>回复了你:</span>
+                                <span>{{li.replyId}}</span>
+                                <p>{{li.reply}}</p>
+                                <time>{{li.time.day}} {{li.time.minute}} </time>
+                                <a class="delete" ng-show="name == '邓志阳'" ng-click="delAnswer(item._id, li.replyId)">删除</a>
+                                <hr>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="reply" ng-show="(item.name == name || name == '邓志阳')">
+                    <form ng-submit="reply(item._id)">
+                        <textarea placeholder="回复留言" class="a{{item._id}}" required id="" cols="30" rows="1" style="resize:none"></textarea>
+                        <input type="submit" value="回复">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </section>
 </div>

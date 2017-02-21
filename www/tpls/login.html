@@ -1,7 +1,7 @@
 <div class="login" ng-controller="login">
     <section>
         <div class="form">
-            <div id="message" class="word" ng-show="word" >{{word}}</div>
+            <div id="message" class="errorbox" ng-show="word" >{{word}}</div>
             <form ng-submit="login()">
                 <input type="text"ng-model="formData.name" ng-click="errorBye()" autofocus required placeholder="请输入用户名"><br>
                 <input type="password" ng-model="formData.password" ng-click="errorBye()" required placeholder="请输入密码"><br>
