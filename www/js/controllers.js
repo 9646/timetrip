@@ -124,12 +124,40 @@ timetrip.controller('checkin', function($scope,$http) {
     console.log('签到')
 })
 
-timetrip.controller('blogs', function($scope,$http) {
-    console.log('博客详情')
+timetrip.controller('blogs', function($scope, $state, $http) {
+    console.log('博客详情');
+    $http({
+        method: 'GET',
+        url: '/blogs/allBlogs'
+    }).success(function(data) {
+        if(data.success) {
+            console.log(data);
+            $scope.blogs = data.data;
+            console.log($scope.blogs);
+        }
+    })
+    $scope.toBlog = function(id) {
+        console.log(id);
+        // $state.go('blog', {id: id});
+        // console.log('#/blog/' + id);
+        window.location.href='#/blog/' + id;
+    }
 })
 
-timetrip.controller('blog', function($scope,$http) {
+timetrip.controller('blog', function($scope,$http, $stateParams) {
     console.log('博客');
+    console.log($stateParams);
+    $http({
+        method: 'POST',
+        url: 'blogs/getBlog',
+        data: $stateParams
+    }).success(function(data) {
+        if(data.success) {
+
+        }
+        console.log(data);
+    })
+
 })
 
 timetrip.controller('addblog', function($scope,$http) {

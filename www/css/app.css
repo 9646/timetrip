@@ -96,7 +96,8 @@ nav {
 
 nav a{
     float: right;
-    width: 50px;
+    /*width: 50px;*/
+    margin: 0 15px;
     line-height: 50px;
 }
 
@@ -206,4 +207,28 @@ main {
     padding: 3px 10px;
     margin-top: 10px;
     font-size: 20px;
+}
+/*博客列表*/
+.blogs section{
+    padding: 20px;
+    background-color: #333;
+}
+.blogs .aBlog a:host {
+    display: none;
+}
+.blogs .aBlog .blog{
+    border-radius: 5px;
+    border: solid 2px #b94a48;
+    padding: 20px;
+    cursor: pointer; 
+}
+
+.blogs section>ul{
+    padding: 0px;
+}
+
+.blogs section ul .aBlog{
+    border: solid 1px #555;
+    padding: 10px;
+    margin-top: 20px;
 }

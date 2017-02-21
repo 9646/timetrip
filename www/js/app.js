@@ -43,7 +43,7 @@ timetrip.config(function($stateProvider,$urlRouterProvider){
             }
         }
     })
-    // 博客
+    // 博客s
     .state('blogs',{
         url:'/blogs',
         views:{
@@ -57,7 +57,7 @@ timetrip.config(function($stateProvider,$urlRouterProvider){
     })    
     // 博客
     .state('blog',{
-        url:'/blog',
+        url:'/blog/:blogId',
         views:{
             '':{
                 templateUrl:'tpls/navigation.html'
@@ -67,7 +67,7 @@ timetrip.config(function($stateProvider,$urlRouterProvider){
             }
         }
     })    
-    // 博客
+    // add博客
     .state('addblog',{
         url:'/addblog',
         views:{
