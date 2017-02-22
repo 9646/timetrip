@@ -4,74 +4,13 @@
 
     <section>
         <ul class="">
-            <li class="aBlog" ng-repeat="blog in blogs">
-                <!--<a ui-sref="blog">主页</a>-->
-                <div class="blog" ng-click="toBlog(blog._id)">
-                    <h3>{{blog.blog.title}}</h3>
-                    作者：<name>{{blog.name}}</name><br>
+            <li class="aBlog" ng-repeat="blog in blogs" ng-click="toBlog(blog._id)">
+                <span>
+                    {{blog.blog.title}}
+                </span>
+                <div class="blog" >
                     <time>{{blog.time.day}} {{blog.time.minute}} </time>
-                </div>
-
-                <div>
-                    <ul>
-                        <li >
-                            <name>张三</name> <span>回复了你:</span>
-                            <!--<span>{{li.replyId}}</span>-->
-                            <p>写的真好</p>
-                            <time>年月日  时分</time>
-                            <a >删除</a>
-                            
-                        </li>
-                        <li >
-                            <name>张三</name> <span>回复了你:</span>
-                            <!--<span>{{li.replyId}}</span>-->
-                            <p>写的真好</p>
-                            <time>年月日  时分</time>
-                            <a >删除</a>
-                        </li>
-                        <li >
-                            <name>张三</name> <span>回复了你:</span>
-                            <!--<span>{{li.replyId}}</span>-->
-                            <p>写的真好</p>
-                            <time>年月日  时分</time>
-                            <a >删除</a>
-                            
-                        </li>
-     
-                    </ul>
-                </div>
-            </li>
-            <li class="aBlog">
-                <div>
-                    <title>标题</title>
-                    <name>作者</name>
-                    <time>时间</time>
-                </div>
-                <div>
-                    <ul>
-                        <li >
-                            <name>张三</name> <span>回复了你:</span>
-                            <!--<span>{{li.replyId}}</span>-->
-                            <p>写的真好</p>
-                            <time>年月日  时分</time>
-                            <a >删除</a>
-                        </li>
-                        <li >
-                            <name>张三</name> <span>回复了你:</span>
-                            <!--<span>{{li.replyId}}</span>-->
-                            <p>写的真好</p>
-                            <time>年月日  时分</time>
-                            <a >删除</a>
-                        </li>
-                        <li >
-                            <name>张三</name> <span>回复了你:</span>
-                            <!--<span>{{li.replyId}}</span>-->
-                            <p>写的真好</p>
-                            <time>年月日  时分</time>
-                            <a >删除</a>
-                        </li>
-     
-                    </ul>
+                    <span>( {{blog.answers.length}} )</span>
                 </div>
             </li>
         </ul>

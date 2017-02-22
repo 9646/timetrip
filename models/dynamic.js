@@ -91,3 +91,25 @@ dynamic.addComment = function(id,data, callback) {
         })
     })
 }
+
+dynamic.deleteDynamic = function(id, callback) {
+    console.log(2);
+    mongodb.open(function(err, db) {
+        if(err) {
+            return callback(err);
+        }
+        db.collection('dynamics', function(err, collection) {
+            if(err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.remove({_id: new ObjectID(id)}, function(err) {
+                mongodb.close();
+                if(err) {
+                    return callback(err);
+                }
+                return callback(null);
+            })
+        })
+    })
+}

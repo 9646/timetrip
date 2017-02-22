@@ -1,5 +1,19 @@
 <div class="blog" ng-controller="blog">
+    <section class="blogInfo">
+        <div>
+            <h3>{{blogInfo.blog.title}} </h3>
+            <name>{{blogInfo.name}}</name>
+            <a ng-click="deleteBlog(blogInfo._id)">删除</a>
+        </div>
+        <article></article>
+    </section>
+    <section class="comment">
+        <form name="form" ng-submit="postMessage()">
+            <textarea ng-model="message" placeholder="留下你的想方法" required id="" cols="30" rows="2" style="resize:none"></textarea>
+            <input type="submit" value="评论">
+        </form>
+    </section>
     <section>
-        <h3></h3>
+
     </section>
 </div>

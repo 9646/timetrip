@@ -20,7 +20,7 @@ a, name{
 }
 body{
     font-family:'Microsoft YaHei';
-    background-color: #000000;
+    background-color: #121212;
     color: white;
     /*background-image: linear-gradient(to bottom, #000, #222, #000);*/
 }
@@ -133,7 +133,7 @@ main {
 }
 
 /*留言*/
-.message section form textarea {
+.message section form textarea, .blog section form textarea {
     width: 80%;
     padding: 10px;
     background-color: #444;
@@ -213,14 +213,18 @@ main {
     padding: 20px;
     background-color: #333;
 }
+.blogs .aBlog {
+    cursor: pointer; 
+}
+.blogs .aBlog span,.blogs .aBlog time{
+    font-size: 14px;
+}
 .blogs .aBlog a:host {
     display: none;
 }
 .blogs .aBlog .blog{
     border-radius: 5px;
-    border: solid 2px #b94a48;
-    padding: 20px;
-    cursor: pointer; 
+    float: right;
 }
 
 .blogs section>ul{
@@ -231,4 +235,20 @@ main {
     border: solid 1px #555;
     padding: 10px;
     margin-top: 20px;
+}
+
+/*博客详情*/
+.blogInfo {
+    padding: 1px;
+    background-color: #333;
+}
+
+.blogInfo>div{
+    padding: 20px;
+}
+
+.blogInfo article {
+    border: solid 1px #555;
+    margin: 30px;
+    padding: 20px;
 }

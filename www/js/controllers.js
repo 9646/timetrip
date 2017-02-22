@@ -124,7 +124,7 @@ timetrip.controller('checkin', function($scope,$http) {
     console.log('签到')
 })
 
-timetrip.controller('blogs', function($scope, $state, $http) {
+timetrip.controller('blogs', function($scope, $http) {
     console.log('博客详情');
     $http({
         method: 'GET',
@@ -153,11 +153,25 @@ timetrip.controller('blog', function($scope,$http, $stateParams) {
         data: $stateParams
     }).success(function(data) {
         if(data.success) {
-
+            $scope.blogInfo = data.data[0];
         }
-        console.log(data);
+        document.querySelector('.blog article').innerHTML = data.data[0].blog.content;
     })
-
+    $scope.deleteBlog = function(id) {
+        console.log(id);
+        var data = {};
+        data.id = id;
+        $http({
+            method: 'POST',
+            url: 'blogs/deleteBlog',
+            data: data
+        }).success(function(data) {
+            console.log(data);
+            if(data.success)  {
+                window.location.href = '#/blogs';
+            }
+        })
+    }
 })
 
 timetrip.controller('addblog', function($scope,$http) {
