@@ -2,7 +2,7 @@ var express = require('express');
 var time = require('../utilities');
 var dynamic = require('../models/dynamic');
 var router = express.Router();
-
+// 查询所有博客
 router.post('/addblog', function(req, res) {
     req.body.time = time(new Date());
     req.body.answers = [];
@@ -13,7 +13,7 @@ router.post('/addblog', function(req, res) {
         return res.send({success: true, message:'添加成功',data: req.body});
     })
 })
-// 查询所欲
+// 查询所有
 router.get('/allBlogs', function(req, res) {
     dynamic.gitDynamic({type: 'blog'}, null, function(err, blogs) {
         if(err) {
@@ -34,13 +34,37 @@ router.post('/getBlog', function(req, res) {
 
 // 删除
 router.post('/deleteBlog', function(req,res) {
-    console.log(1);
-    console.log(req.body)
     dynamic.deleteDynamic(req.body.id, function(err) {
         if(err) {
             return res.send({success: false, message:'删除失败', data:null});
         }
         return res.send({success: true, message:'删除成功', data: null});
     })
+})
+
+// 添加评论
+router.post('/addComment', function(req, res) {
+    req.body.time = time(new Date());
+    req.body.commentId = req.body.time.date.getTime() + '';
+    console.log(req.body);
+    dynamic.addComment(req.body.id, req.body, function(err, data) {
+        if(err) {
+            return res.send({success: false, message:'评论失败', data: null});
+        }
+        return res.send({success: true, message:'评论成功', data: data});        
+    })
+})
+
+// 删除评论
+router.post('/delComment', function(req, res) {
+    console.log('delComment')
+    console.log(req.body);
+    dynamic.deleteComment(req.body.id, req.body.answerId, function(err) {
+        if(err) {
+            return res.send({success:false, message:'删除评论失败',data:null});
+        }
+        return res.send({success:true, message:'删除评论成功', data:null});
+    })
+
 })
 module.exports = router;

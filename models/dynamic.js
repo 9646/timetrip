@@ -71,7 +71,10 @@ dynamic.update = function(data, id, callback) {
     })
 }
 
-dynamic.addComment = function(id,data, callback) {
+//添加评论
+dynamic.addComment = function(id, data, callback) {
+    console.log(id);
+    console.log(data);
     mongodb.open(function(err, db) {
         if(err) {
             return callback(err);
@@ -81,7 +84,7 @@ dynamic.addComment = function(id,data, callback) {
                 mongodb.close();
                 return callback(err);
             }
-            collection.update({id: new ObjectID(id)}, {$push: {'answers': data}}, {}, function(err) {
+            collection.update({_id: new ObjectID(id)}, {$push: {'answers': data}}, {}, function(err) {
                 mongodb.close();
                 if(err) {
                     return callback(err);
@@ -91,6 +94,32 @@ dynamic.addComment = function(id,data, callback) {
         })
     })
 }
+
+// 删除评论
+dynamic.deleteComment = function(id, answerId, callback) {
+    console.log(id);
+    console.log(answerId);
+    console.log('------------------')
+    mongodb.open(function(err, db) {
+        if(err) {
+            return callback(err);
+        }
+        db.collection('dynamics', function(err, collection) {
+            if(err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.update({_id: new ObjectID(id)}, {$pull:{'answers': {commentId: answerId}}}, function(err) {
+                mongodb.close();
+                if(err) {
+                    return callback(err);
+                }
+                return callback(null);
+            })
+        })
+    })
+}
+
 
 dynamic.deleteDynamic = function(id, callback) {
     console.log(2);

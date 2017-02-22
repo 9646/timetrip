@@ -125,7 +125,7 @@ timetrip.controller('checkin', function($scope,$http) {
 })
 
 timetrip.controller('blogs', function($scope, $http) {
-    console.log('博客详情');
+    console.log('博客s');
     $http({
         method: 'GET',
         url: '/blogs/allBlogs'
@@ -145,25 +145,46 @@ timetrip.controller('blogs', function($scope, $http) {
 })
 
 timetrip.controller('blog', function($scope,$http, $stateParams) {
-    console.log('博客');
+    $scope.rootname = '邓志阳';
+    console.log('博客详情');
     console.log($stateParams);
     $http({
-        method: 'POST',
-        url: 'blogs/getBlog',
-        data: $stateParams
+        method:'GET',
+        url: '/home'
     }).success(function(data) {
         if(data.success) {
-            $scope.blogInfo = data.data[0];
+            $scope.name = data.data.name;
+        }else{
+            $scope.name = ''
         }
-        document.querySelector('.blog article').innerHTML = data.data[0].blog.content;
-    })
+        console.log($scope.name);
+    });
+    function load() {
+        $http({
+            method: 'POST',
+            url: '/blogs/getBlog',
+            data: $stateParams
+        }).success(function(data) {
+            if(data.success) {
+                $scope.blogInfo = data.data[0];
+            }
+            console.log($scope.blogInfo)
+            document.querySelector('.blog article').innerHTML = data.data[0].blog.content;
+        })
+    }
+    load();
+    // 删除
     $scope.deleteBlog = function(id) {
+        if($scope.name != $scope.rootname) {
+            console.log('没有权限删除')
+            return;
+        }
         console.log(id);
         var data = {};
         data.id = id;
         $http({
             method: 'POST',
-            url: 'blogs/deleteBlog',
+            url: '/blogs/deleteBlog',
             data: data
         }).success(function(data) {
             console.log(data);
@@ -172,6 +193,43 @@ timetrip.controller('blog', function($scope,$http, $stateParams) {
             }
         })
     }
+
+    $scope.addComment = function(id) {
+        var data = {};
+        data.id = id;
+        data.comment = $scope.message;
+        data.name = $scope.name;
+        console.log(data);
+        $http({
+            method:'POST',
+            url:'/blogs/addComment',
+            data: data
+        }).success(function(data) {
+            console.log(data);
+            if(data.success) {
+                load();
+                $scope.message = ''
+            }
+        })
+    }
+    // 删除评论
+    $scope.delComment = function(id, answerId) {
+        var data = {}
+        data.id = id;
+        data.answerId = answerId;
+        console.log(data);
+        $http({
+            method: 'POST',
+            url:'/blogs/delComment',
+            data: data
+        }).success(function(data) {
+            if(data.success) {
+                load();
+            }
+            console.log(data);
+        })
+    }
+
 })
 
 timetrip.controller('addblog', function($scope,$http) {
