@@ -79,6 +79,18 @@ timetrip.config(function($stateProvider,$urlRouterProvider){
             }
         }
     })
+    // 更新博客
+    .state('amendblog',{
+        url:'/amendblog/:blogId',
+        views:{
+            '':{
+                templateUrl:'tpls/navigation.html'
+            },
+            'nav@amendblog':{
+                templateUrl:'tpls/amendblog.html'
+            }
+        }
+    })
     // 留言板
     .state('message',{
         url:'/message',

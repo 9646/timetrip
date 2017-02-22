@@ -2,7 +2,7 @@ var express = require('express');
 var time = require('../utilities');
 var dynamic = require('../models/dynamic');
 var router = express.Router();
-// 查询所有博客
+// 添加博客
 router.post('/addblog', function(req, res) {
     req.body.time = time(new Date());
     req.body.answers = [];
@@ -32,7 +32,7 @@ router.post('/getBlog', function(req, res) {
     })
 })
 
-// 删除
+// 删除博客
 router.post('/deleteBlog', function(req,res) {
     dynamic.deleteDynamic(req.body.id, function(err) {
         if(err) {
@@ -66,5 +66,17 @@ router.post('/delComment', function(req, res) {
         return res.send({success:true, message:'删除评论成功', data:null});
     })
 
+})
+
+// 更新博客
+router.post('/amendBlog', function(req, res) {
+    console.log('111111111111111111111111111')
+
+    dynamic.update(req.body, req.body.id, function(err) {
+        if(err) {
+            return res.send({success: false, message: '更新失败', data: null});
+        }
+        return res.send({success: true, message: '更新成功', data: null});
+    })
 })
 module.exports = router;

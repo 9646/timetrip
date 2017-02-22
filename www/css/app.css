@@ -179,14 +179,14 @@ main {
 
 /*博客页面*/
 /*添加博客*/
-.addblog section {
+.addblog section, .amendblog section{
     padding: 10px 10px;
     background-color: #cfbaaa;
     border: solid 2px sandybrown;
     border-radius: 5px;
 
 }
-.addblog input{
+.addblog input,.amendblog input{
         /*width: 100px;*/
     border: solid 1px gray;
     border-radius: 3px;
@@ -194,7 +194,7 @@ main {
     box-sizing: border-box
 }
 
-.addblog input[name='title'] {
+.addblog input[name='title'],.amendblog input[name='title'] {
     color: sandybrown;
     display: block;
     width: 80%;
@@ -203,7 +203,9 @@ main {
     font-size: 24px;
     text-align: center;
 }
-.addblog input[type="submit"], .addblog input[type="reset"]{
+.addblog input[type="submit"],.addblog input[type="reset"],
+.amendblog input[type="submit"],.amendblog input[type="reset"]
+{
     padding: 3px 10px;
     margin-top: 10px;
     font-size: 20px;

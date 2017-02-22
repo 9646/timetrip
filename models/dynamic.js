@@ -50,6 +50,8 @@ dynamic.gitDynamic = function(data, id, callback) {
 }
 // 更新数据
 dynamic.update = function(data, id, callback) {
+    console.log(data);
+    console.log(id);
     mongodb.open(function(err, db) {
         if(err) {
             return callback(err);
@@ -59,16 +61,16 @@ dynamic.update = function(data, id, callback) {
                 mongodb.close();
                 return callback(err);
             }
-            collection.update({_id: new ObjectID(id)}, {$set: { dynamic: data}}, function(err) {
+            collection.update({_id: new ObjectID(id)}, {$set: { 'blog.content': data.content, 'blog.title': data.title}}, function(err) {
                 mongodb.close()
                 if(err){
                     return callback(err);
                 }
                 return callback(null);
             }) 
-
         })
     })
+    // return callback(null);
 }
 
 //添加评论
@@ -120,7 +122,7 @@ dynamic.deleteComment = function(id, answerId, callback) {
     })
 }
 
-
+// 删除
 dynamic.deleteDynamic = function(id, callback) {
     console.log(2);
     mongodb.open(function(err, db) {

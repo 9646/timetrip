@@ -229,8 +229,63 @@ timetrip.controller('blog', function($scope,$http, $stateParams) {
             console.log(data);
         })
     }
-
+    // 跳转到修改博客页面
+    $scope.amendBlog = function(id) {
+        console.log(id);
+        // $state.go('blog', {id: id});
+        // console.log('#/blog/' + id);
+        window.location.href='#/amendblog/' + id;
+    }
 })
+// 修改博客
+timetrip.controller('amendblog', function($scope, $http, $stateParams) {
+    $scope.rootname = '邓志阳';
+    function load() {
+        $http({
+            method:'GET',
+            url: '/home'
+        }).success(function(data) {
+            if(data.success) {
+                // $scope.name = data.data.name;
+            }
+            if($scope.name != $scope.name){
+                window.location.href = '#/blogs';
+            }
+
+        });
+    }
+    load();
+    $http({
+        method:'POST',
+        url:'/blogs/getBlog',
+        data: $stateParams
+    }).success(function(data) {
+        console.log(data);        
+        console.log(data.data[0])
+        $scope.data = data.data[0]
+        if(data.success) {
+            editor.appendHtml($scope.data.blog.content)
+        }
+    })
+    $scope.amendBlog = function() {
+        console.log($scope.data);    
+        var data = {};
+        data.title = $scope.data.blog.title;
+        data.content = editor.html();
+        data.id = $scope.data._id;
+        $http({
+            method: 'POST',
+            url:'/blogs/amendBlog',
+            data: data
+        }).success(function(data) {
+            if(data) {
+
+            }
+            console.log(data);
+        })
+    }
+})
+
 
 timetrip.controller('addblog', function($scope,$http) {
     console.log('添加博客')
