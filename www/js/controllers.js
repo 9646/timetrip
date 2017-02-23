@@ -143,6 +143,9 @@ timetrip.controller('home', function($scope,$http) {
         data.mood = $scope.mood;
         data.name = $scope.name;
         data.type = 'mood';
+        if(!$scope.name) {
+            return;
+        }
         $http({
             method:'POST',
             url: '/moods/addMood',
@@ -193,6 +196,9 @@ timetrip.controller('mood', function($scope,$http) {
         data.mood = $scope.mood;
         data.name = $scope.name;
         data.type = 'mood';
+        if(!$scope.name) {
+            return;
+        }
         $http({
             method:'POST',
             url: '/moods/addMood',
