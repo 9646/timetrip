@@ -1,9 +1,9 @@
 var timetrip = angular.module('timetrip', ['ui.router']);
 
-timetrip.run(function($rootScope,$state,$stateParams){
-    $rootScope.$state = $state;
-    $rootScope.$stateParams = $stateParams;
-})
+// timetrip.run(function($rootScope,$state,$stateParams){
+//     $rootScope.$state = $state;
+//     $rootScope.$stateParams = $stateParams;
+// })
 
 timetrip.config(function($stateProvider,$urlRouterProvider){
     $stateProvider

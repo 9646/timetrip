@@ -117,7 +117,97 @@ timetrip.controller('home', function($scope,$http) {
 })
 
 timetrip.controller('mood', function($scope,$http) {
-    console.log('心情')
+    $scope.rootname = '邓志阳'
+    $http({
+        method:'GET',
+        url: '/home'
+    }).success(function(data) {
+        if(data.success) {
+            $scope.name = data.data.name;
+        }else{
+            $scope.name = ''
+        }
+    });
+
+    // 查询所有的心情
+    function load() {
+        $http({
+            method: 'GET',
+            url:'/moods/allMood'
+        }).success(function(data) {
+            if(data.success) {
+                $scope.moods = data.data;
+            }
+        })
+    }
+    load();
+
+    // 发表心情
+    $scope.postMood = function() {
+        var data = {};
+        data.mood = $scope.mood;
+        data.name = $scope.name;
+        data.type = 'mood';
+        $http({
+            method:'POST',
+            url: '/moods/addMood',
+            data: data
+        }).success(function(data) {
+            if(data.success){
+                $scope.mood = '';
+                load();
+            }
+        })
+    }
+
+    // 评论
+    $scope.reply = function(id) {
+        var data = {}
+        data.id = id;
+        var comment = document.querySelector('.a' + id).value;
+        data.comment = comment;
+        $http({
+            method: 'POST',
+            url:'/blogs/addComment',
+            data: data
+        }).success(function(data) {
+            if(data.success) {
+                load();
+            }
+            console.log(data);
+        })
+    }
+    // 删除心情
+    $scope.deleteMood = function(id) {
+        var data = {
+            id : id
+        }
+        $http({
+            method:'POST',
+            url:'/moods/deleteMood',
+            data: data
+        }).success(function(data) {
+            if(data.success) {
+                load();
+            }
+        })
+    }
+    // 删除评论
+    $scope.deleteComment = function(id, commentId) {
+        var data = {};
+        data.id = id;
+        data.commentId = commentId;
+        $http({
+            method:'POST',
+            url:'/moods/deleteComment',
+            data: data
+        }).success(function(data) {
+            if(data.success) {
+                load();
+            }
+        })
+    }
+
 })
 
 timetrip.controller('checkin', function($scope,$http) {

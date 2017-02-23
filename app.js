@@ -12,6 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 var index = require('./routes/index');
 var users = require('./routes/users');
 var blogs = require('./routes/blogs');
+var moods = require('./routes/moods');
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/blogs', blogs);
+app.use('/moods', moods);
 
 app.post('signin', function(req,res) {
   console.log(req);

@@ -5,6 +5,7 @@ var dynamic = {};
 module.exports = dynamic;
 
 dynamic.addDynamic = function(data, callback) {
+    console.log(data);
     mongodb.open(function(err, db) {
         if(err) {
             return callback(err);
