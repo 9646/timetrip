@@ -113,7 +113,52 @@ timetrip.controller('signin', function($scope,$http) {
 
 timetrip.controller('home', function($scope,$http) {
     console.log('主页')
-    
+    $scope.rootname = '邓志阳'
+    $http({
+        method:'GET',
+        url: '/home'
+    }).success(function(data) {
+        if(data.success) {
+            $scope.name = data.data.name;
+        }else{
+            $scope.name = ''
+        }
+    });
+
+    function load() {
+        $http({
+            method:'GET',
+            url: '/dynamic'
+        }).success(function(data){
+            if(data.success) {
+                $scope.dynamics = data.data;
+            }
+            console.log($scope.dynamics);
+        })
+    }
+    load();
+
+    $scope.postMood = function() {
+        var data = {};
+        data.mood = $scope.mood;
+        data.name = $scope.name;
+        data.type = 'mood';
+        $http({
+            method:'POST',
+            url: '/moods/addMood',
+            data: data
+        }).success(function(data) {
+            if(data.success){
+                $scope.mood = '';
+                load();
+            }
+        })
+    }
+
+    $scope.toBlog = function(id) {
+        console.log(id);
+        window.location.href = '#/blog/' + id;
+    }
 })
 
 timetrip.controller('mood', function($scope,$http) {

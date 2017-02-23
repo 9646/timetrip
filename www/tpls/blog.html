@@ -1,7 +1,7 @@
 <div class="blog" ng-controller="blog">
     <section class="blogInfo">
         <div>
-            <h3>{{blogInfo.blog.title}} </h3>
+            <h3>《{{blogInfo.blog.title}}》 </h3>
             <!--<name>{{blogInfo.name}}</name>-->
             <a ng-show="name == rootname" ng-click="deleteBlog(blogInfo._id)">删除</a>
             <a ng-show="name == rootname" ng-click="amendBlog(blogInfo._id)">编辑</a>

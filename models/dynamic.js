@@ -25,7 +25,7 @@ dynamic.addDynamic = function(data, callback) {
         })
     })
 }
-
+// 查找数据
 dynamic.gitDynamic = function(data, id, callback) {
     if(id) {
         data._id = new ObjectID(id);

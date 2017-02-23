@@ -109,6 +109,10 @@ nav a{
 main {
     box-sizing: border-box
 }
+.home {
+    border: 1px solid #333;
+    padding: 20px;
+}
 .home textarea {
     width: 80%;
     padding: 10px;
@@ -129,9 +133,16 @@ main {
 
 .home section{
 
-    border: solid 1px red;
 }
 
+.home ul{
+    padding: 0px;
+}
+
+.home ul li{
+    border: 1px solid red;
+    margin: 20px;
+}
 /*留言*/
 .message section form textarea, .blog section form textarea {
     width: 80%;

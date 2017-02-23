@@ -1,23 +1,26 @@
 <div class="home" ng-controller="home">
     <section>
-        <form>
+        <form ng-submit="postMood()">
             <textarea ng-model="mood" cols="30" rows="2" autofocus style="resize:none" placeholder="随便说点什么"></textarea>
             <input type="submit" value="签到">
-    </form>
+        </form>
     </section>
     <section>
         <ul>
-            <li>
-                <time>2016年1月</time>
-                <div>
+            <li ng-repeat="dynamic in dynamics">
+                <time>{{dynamic.time.day}} </time>
+                <div ng-show="dynamic.type == 'mood'">
                     <div>
-                        <p>说的话</p>
-                        <img src="" alt="">
+                        <p>{{dynamic.mood}}</p>
                     </div>
-                    <div>
-                        <span>评论</span>
-                        <span>点赞</span>
-                    </div>
+
+                </div>
+                <div ng-show="dynamic.type == 'blog'">
+
+                    <p ng-click="toBlog(dynamic._id)">
+                        《{{dynamic.blog.title}}》
+                    </p>
+                    
                 </div>
             </li>
         </ul>

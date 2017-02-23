@@ -1,6 +1,7 @@
 var express = require('express');
 var time = require('../utilities');
 var message = require('../models/message');
+var dynamic = require('../models/dynamic');
 var router = express.Router();
 
 router.get('/home', function(req, res, next) {
@@ -67,5 +68,14 @@ router.post('/delAnswer', function(req, res) {
   })
 })
 
+// 查找所有动态
+router.get('/dynamic', function(req, res) {
+  dynamic.gitDynamic(null, null, function(err, data) {
+    if(err) {
+      return res.send({success: false, message:'获取所有动态失败',data:null});
+    }
+    return res.send({success: true, message:'获取动态成功', data: data});
+  })
+})
 
 module.exports = router;
