@@ -40,20 +40,15 @@ User.prototype.save = function(callback) {
 //查询用户
 User.get = function(name, callback) {
     mongodb.open(function(err, db) {
-            console.log(name)
         if(err) {
             return callback(err);
         }
         db.collection('users', function(err, collection) {
-            console.log(name)
             if(err) {
                 mongodb.close();
                 return callback(err);
             }
             collection.findOne({name: name}, function(err, user) {
-                
-            console.log(name)
-                
                 mongodb.close();
                 if(err) {
                     return callback(err);

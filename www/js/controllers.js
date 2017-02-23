@@ -217,6 +217,9 @@ timetrip.controller('mood', function($scope,$http) {
         data.id = id;
         var comment = document.querySelector('.a' + id).value;
         data.comment = comment;
+        if(!$scope.name) {
+            return;
+        }
         $http({
             method: 'POST',
             url:'/blogs/addComment',
@@ -230,6 +233,9 @@ timetrip.controller('mood', function($scope,$http) {
     }
     // 删除心情
     $scope.deleteMood = function(id) {
+        if(!$scope.name) {
+            return;
+        }
         var data = {
             id : id
         }
@@ -245,6 +251,9 @@ timetrip.controller('mood', function($scope,$http) {
     }
     // 删除评论
     $scope.deleteComment = function(id, commentId) {
+        if(!$scope.name) {
+            return;
+        }
         var data = {};
         data.id = id;
         data.commentId = commentId;
