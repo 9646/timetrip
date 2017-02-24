@@ -3,7 +3,7 @@
         <div id="message" class="successbox" ng-show="success" >{{word}}</div>
         <div id="message" class="successbox" ng-show="success" >{{word}}</div>
         <form name="form" ng-submit="postMood()">
-            <textarea ng-model="mood" placeholder="心情" required id="" cols="30" rows="2" style="resize:none"></textarea>
+            <textarea ng-model="mood" placeholder="心情" required maxlength="100" cols="50" rows="2" style="resize:none"></textarea>
             <input type="submit" value="心情">
         </form>
     </section>
@@ -11,28 +11,25 @@
         <ul class="replyUl">
             <li class="replyLi" ng-repeat="item in moods">
                 <div>
-                    <!--<name>{{item.name}}</name> <span>给你留言:</span>-->
-                    <p>{{item.mood}}</p>
+                    <name>{{item.name}}</name><br>
                     <time>{{item.time.day}} {{item.time.minute}}</time>
                     <a class="delete" ng-show="name == rootname" ng-click="deleteMood(item._id)">删除</a>
+                    <p class="comment">{{item.mood}}</p>
                     <br>
-                    <hr>
                     <div>
                         <ul>
                             <li ng-repeat="li in item.answers">
-                                <name>{{li.name}}</name> <span>回复了你:</span>
-                                <span>{{li.commentId}}</span>
-                                <p>{{li.comment}}</p>
+                                <name>{{li.name}} :</name>
+                                <span>{{li.comment}}</span><br>
                                 <time>{{li.time.day}} {{li.time.minute}} </time>
                                 <a class="delete" ng-show="name == rootname" ng-click="deleteComment(item._id, li.commentId)">删除</a>
-                                <hr>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="reply">
                     <form ng-submit="reply(item._id)">
-                        <textarea placeholder="评论" class="a{{item._id}}"  required cols="30" rows="2" style="resize:none"></textarea>
+                        <textarea placeholder="评论" class="a{{item._id}}"  required cols="50" rows="1" style="resize:none"></textarea>
                         <input type="submit" value="评论">
                     </form>
                 </div>

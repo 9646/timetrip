@@ -1,6 +1,6 @@
 * {
     border-style: none;
-    font-size: 16px;
+    font-size: 14px;
 }
 input {
     color: white;
@@ -10,9 +10,11 @@ ul {
 }
 p {
     margin: 0;
+    word-break:break-all;
 }
+
 textarea{
-    color: white;
+    color: #ccc;
 }
 a, name{
     color: #19B1F5;   
@@ -21,18 +23,20 @@ a, name{
 body{
     font-family:'Microsoft YaHei';
     background-color: #121212;
-    color: white;
-    /*background-image: linear-gradient(to bottom, #000, #222, #000);*/
+    color: #ccc;
+}
+header {
+    overflow: hidden;
 }
 
 
 /*登录页面*/
 .login section, .signin section{
-    width: 500px;
-    margin: 150px auto;
+    width: 80%;
+    margin: 10% auto;
     border: solid 2px slategrey;
     border-radius: 10px;
-    padding: 100px;
+    padding: 10%;
     box-sizing: border-box;
     position: relative;
 }
@@ -50,7 +54,7 @@ body{
     border: solid 1px gray;    
     border-radius: 5px;    
     background-color: #1A1A1A;
-    padding: 20px;
+    padding: 5%;
 }
 .errorbox {
     position: absolute;
@@ -83,8 +87,8 @@ body{
 /*注册页面*/
 
 /*导航*/
-.navigation .nav{
-   
+.navigation .nav li{
+   float: left;
 }
 
 /*logo*/
@@ -111,52 +115,100 @@ main {
 }
 .home {
     border: 1px solid #333;
-    padding: 20px;
 }
 .home textarea {
     width: 80%;
     padding: 10px;
     background-color: #444;
-    box-sizing: border-box
+    height: 64px;   
+    box-sizing: border-box;
 }
-.home section {
+.home section:nth-child(1) {
+    margin: 20px;
     margin-bottom: 20px;
 }
-.home section input[type=submit]{
+
+.home>section>form>input[type=submit]{
     /*margin-top: 20px;*/
-    width: 100px;
+    width: 17%;
     border: solid 1px gray;
     border-radius: 3px;
-    background-color: #1A1A1A;    
-    box-sizing: border-box
+    background-color: #666;    
+    box-sizing: border-box;
+    height: 64px;
+    
 }
 
-.home section{
-
+.home section {
+    overflow: hidden;
 }
+
 
 .home ul{
-    padding: 0px;
+    padding: 20px;
+    width: 70%;
+    float: right;
+    
+    border-left: 5px solid wheat;
 }
 
-.home ul li{
-    border: 1px solid red;
-    margin: 20px;
+.home ul li i {
+    width: 15px;
+    height: 15px;
+    background-color: wheat;
+    display: block;
+    position: relative;
+    right: 31px;
+    border-radius: 50%;
 }
+
+.home ul li time {
+    position: relative;
+    right: 120px;
+    bottom: 18px;
+}
+
+
+.home ul li{
+    border: 1px solid #333;
+    margin: 20px 0;
+    /*padding: 20px;*/
+}
+
+.home ul li .blog {
+    cursor: pointer;
+    color: #169ada
+}
+
+.home ul li name{
+    font-size: 14px;
+    color: #cfbaaa;
+    position: relative;
+    bottom: 30px;
+    left: 10px;
+}
+.home ul li p{
+    font-size: 14px;
+    padding: 0 20px 20px 20px;
+
+}
+
 /*留言*/
 .message section form textarea, .blog section form textarea {
     width: 80%;
     padding: 10px;
     background-color: #444;
-    box-sizing: border-box
+    box-sizing: border-box;
+    height: 60px;
 }
 .message section input[type=submit]{
     /*margin-top: 20px;*/
-    width: 100px;
+    width: 18%;
     border: solid 1px gray;
     border-radius: 3px;
-    background-color: #1A1A1A;    
-    box-sizing: border-box
+    background-color: #666;    
+    box-sizing: border-box;
+    height: 60px;
 }
 .message .replyUl {
     padding: 0px;
@@ -166,6 +218,13 @@ main {
     padding: 20px;
     box-sizing: border-box;
     border: solid 1px gray;
+}
+
+.message .reply textarea{
+    height: 40px;
+}
+.message .reply input[value='回复'] {
+    height: 40px;
 }
 .message p {
     padding: 10px;
@@ -228,6 +287,7 @@ main {
 }
 .blogs .aBlog {
     cursor: pointer; 
+    overflow: hidden;
 }
 .blogs .aBlog span,.blogs .aBlog time{
     font-size: 14px;
@@ -262,11 +322,82 @@ main {
 
 .blogInfo article {
     border: solid 1px #555;
-    margin: 30px;
+    margin: 30px 0;
     padding: 20px;
+    overflow: unset;
+}
+
+#blog > .comment {
+    padding-top: 20px;
+}
+#blog > .comment>form>textarea {
+    height: 60px;
+    width: 80%;
+}
+#blog > .comment>form>input {
+    height: 60px;
+    width: 18%;
+    background-color: #666;
+}
+#blog > .answer {
+    padding: 2%;
+}
+#blog > .answer ul {
+    padding: 0px;
+}
+#blog > .answer ul li{
+    padding: 10px 0;
+    border-bottom: solid 1px #333;
+}
+#blog > .answer span {
+    color: #999;
 }
 
 /*心情*/
 .mood textarea {
     background-color: #333;
+    height: 64px;
+    width: 80%;
+    padding: 10px;
+}
+.mood .reply textarea {
+    height: 38px;
+    padding: 6px 10px;
+}
+.mood .addMood input {
+    width: 17%;
+    border: solid 1px gray;
+    border-radius: 3px;
+    background-color: #1A1A1A;    
+    box-sizing: border-box;
+    height: 64px;
+}
+.mood .reply input{
+    /*width: 17%;*/
+    border: solid 1px gray;
+    border-radius: 3px;
+    background-color: #1A1A1A;    
+    box-sizing: border-box;
+    height: 38px;
+}
+
+.mood .addMood {
+    background-color: #222;
+    padding: 20px;
+}
+
+.mood .replyUl {
+    padding: 0;
+}
+
+.mood .replyUl>li {
+    border: solid 1px #333  ;
+    padding: 20px;
+    margin-bottom: 20px;
+        
+}
+
+.mood .comment {
+    padding: 10px;
+    border: solid 1px #222;
 }

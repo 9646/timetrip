@@ -1,14 +1,14 @@
 <div class="blogs" ng-controller="blogs">
-    博客页面
-    <a ui-sref="addblog">添加博客</a>
+    <span>博客列表 </span>
+    <a ui-sref="addblog"> 添加博客</a>
 
     <section>
         <ul class="">
             <li class="aBlog" ng-repeat="blog in blogs" ng-click="toBlog(blog._id)">
-                <span>
+                <span class="col-md-6">
                     《{{blog.blog.title}}》
                 </span>
-                <div class="blog" >
+                <div class="col-md-6" class="blog" >
                     <time>{{blog.time.day}} {{blog.time.minute}} </time>
                     <span>( {{blog.answers.length}} )</span>
                 </div>

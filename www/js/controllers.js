@@ -216,6 +216,7 @@ timetrip.controller('mood', function($scope,$http) {
         var data = {}
         data.id = id;
         var comment = document.querySelector('.a' + id).value;
+        data.name = $scope.name;
         data.comment = comment;
         if(!$scope.name) {
             return;
@@ -318,7 +319,6 @@ timetrip.controller('blog', function($scope,$http, $stateParams) {
             if(data.success) {
                 $scope.blogInfo = data.data[0];
             }
-            console.log($scope.blogInfo)
             document.querySelector('.blog article').innerHTML = data.data[0].blog.content;
         })
     }
@@ -410,15 +410,12 @@ timetrip.controller('amendblog', function($scope, $http, $stateParams) {
         url:'/blogs/getBlog',
         data: $stateParams
     }).success(function(data) {
-        console.log(data);        
-        console.log(data.data[0])
         $scope.data = data.data[0]
         if(data.success) {
             editor.appendHtml($scope.data.blog.content)
         }
     })
     $scope.amendBlog = function() {
-        console.log($scope.data);    
         var data = {};
         data.title = $scope.data.blog.title;
         data.content = editor.html();
@@ -428,17 +425,15 @@ timetrip.controller('amendblog', function($scope, $http, $stateParams) {
             url:'/blogs/amendBlog',
             data: data
         }).success(function(data) {
-            if(data) {
-
+            if(data.success) {
+                window.location.href = '#/blog/' + $scope.data._id;
             }
-            console.log(data);
         })
     }
 })
 
 
 timetrip.controller('addblog', function($scope,$http) {
-    console.log('添加博客')
     $http({
         method:'GET',
         url: '/home'
@@ -448,10 +443,13 @@ timetrip.controller('addblog', function($scope,$http) {
         }else{
             $scope.name = ''
         }
-        console.log($scope.name);
     });
     
     $scope.addblog = function() {
+        if(!$scope.name) {
+            alert('请先登录')
+            return;
+        }
         var data = {};
         data.name = $scope.name;
         data.type = 'blog';

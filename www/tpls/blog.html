@@ -1,29 +1,27 @@
-<div class="blog" ng-controller="blog">
+<div id="blog" class="blog" ng-controller="blog">
     <section class="blogInfo">
         <div>
-            <h3>《{{blogInfo.blog.title}}》 </h3>
+            <h4>《{{blogInfo.blog.title}}》 </h4>
             <!--<name>{{blogInfo.name}}</name>-->
-            <a ng-show="name == rootname" ng-click="deleteBlog(blogInfo._id)">删除</a>
-            <a ng-show="name == rootname" ng-click="amendBlog(blogInfo._id)">编辑</a>
+            <article></article>
+            <a ng-show="name == rootname" ng-click="deleteBlog(blogInfo._id)">删除 </a>
+            <a ng-show="name == rootname" ng-click="amendBlog(blogInfo._id)"> 编辑</a>
         </div>
-        <article></article>
     </section>
     <section class="comment">
         <form name="form" ng-submit="addComment(blogInfo._id)">
-            <textarea ng-model="message" placeholder="留下你的想法" required id="" cols="30" rows="2" style="resize:none"></textarea>
+            <textarea ng-model="message" placeholder="谈谈你的看法" maxlength="100" required id="" cols="30" rows="2" style="resize:none"></textarea>
             <input type="submit" value="评论">
         </form>
     </section>
-    <section>
+    <section class="answer">
         <div ng-show="blogInfo.answers">
             <ul>
                 <li ng-repeat="li in blogInfo.answers">
                     <name>{{li.name}}</name> <span>回复了你:</span>
-                    <span>{{li.replyId}}</span>
                     <p>{{li.comment}}</p>
                     <time>{{li.time.day}} {{li.time.minute}} </time>
-                    <a class="delete" ng-show="name == rootname" ng-click="delComment(blogInfo._id, li.commentId)">删除</a>
-                    <hr>
+                    <a class="delete" ng-show="name == rootname" ng-click="delComment(blogInfo._id, li.commentId)">删除</a><br>
                 </li>
             </ul>
         </div>
