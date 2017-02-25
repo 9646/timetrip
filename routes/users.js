@@ -2,11 +2,8 @@ var express = require('express');
 var User = require('../models/user.js');
 var router = express.Router();
 
+// 注册
 router.post('/signin', function(req, res, next) {
-  console.log(req.body);
-  console.log(req.body.name);
-  console.log(req.body.password);
-  console.log(req.body.email);
   if(req.body.password != req.body.passwordRepeat) {
     return res.send({success: false, message: '两次密码输入的不一致', data:null});
   }
@@ -53,7 +50,7 @@ router.post('/login', function(req, res) {
     }
   })
 })
-
+// 用户名验证
 router.post('/name', function(req, res) {
   if(!req.body.name) {
     res.send({success:false, message:'用户名不能为空', data:null});
@@ -74,8 +71,64 @@ router.post('/name', function(req, res) {
 // 退出
 router.get('/logout', function(req, res, next) {
   req.session.user = null;
-  res.send({success: true, message:'登出成功', data: null});
+  return res.send({success: true, message:'登出成功', data: null});
 }) 
+
+// 查询用户
+router.post('/user', function(req, res) {
+  // console.log(req.body);
+  User.get(req.body.name, function(err, user) {
+    if(err) {
+      return res.send({success: false, message:'用户不存在', data: null});
+    }
+    return res.send({success:true, message:'查询成功', data:user})
+  })
+})
+
+
+// console.log(user);
+// 上传配置
+const multer = require('multer');
+const storage = multer.diskStorage({
+      destination: 'www/picture/portrait',
+      filename: function(req, file, callback){
+        console.log(req.session.user.name);
+        var petname = req.session.user.name;
+        callback(null, `${petname}.${file.originalname.split('.').pop()}`);
+      }
+  })
+
+// 上传
+router.post('/upload', multer({storage}).single('photo'), (req, res) => {
+    // console.log(req.session)
+    var id = req.session.user._id;
+    var data = {
+      'portrait': '../picture/portrait/' + req.file.filename
+    }
+    User.update(id, data, function(err){
+      return res.redirect('/#/my')
+    })
+
+})
+
+// 修改
+router.post('/updateUser', function(req, res) {
+  var id = req.body._id;
+  var data = {
+    'email': req.body.email,
+    'age' : req.body.age,
+    'site' : req.body.site,
+    'birthday' : req.body.birthday,
+    'gender' : req.body.gender
+  };
+
+  User.update(id, data, function(err) {
+    if(err) {
+      return res.send({success:false, message:'修改失败', data: null});
+    }
+    return res.send({success:true, message:'修改成功', data: null});    
+  })
+})
 
 
 module.exports = router;

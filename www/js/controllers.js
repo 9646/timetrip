@@ -1,7 +1,9 @@
 //上面登录注册的控制器
 timetrip.controller('indexCtrl', function($scope, $http) {
+    $scope.portrait = '../picture/portrait/index.jpg'
     $scope.$on('login', function(d, data) {
         $scope.name = data.name;
+        
     })
     $http({
         method:'GET',
@@ -9,11 +11,15 @@ timetrip.controller('indexCtrl', function($scope, $http) {
     }).success(function(data) {
         if(data.success) {
             $scope.name = data.data.name;
+            $scope.portrait = data.data.portrait;
         }else{
-            $scope.name = ''
+            $scope.name = ''          
         }
-        console.log($scope.name);
+        if(!$scope.portrait) {
+            $scope.portrait = '../picture/portrait/index.jpg'
+        }
     });
+    
     $scope.logout = function() {
         // $scope.name = ''
         $http({
@@ -110,7 +116,50 @@ timetrip.controller('signin', function($scope,$http) {
         })
     }
 })
+timetrip.controller('myCtrl', function($scope, $http) {
+    $http({
+        method:'GET',
+        url: '/home'
+    }).success(function(data) {
+        if(data.success) {
+            $scope.name = data.data.name;
+        }else{
+            $scope.name = ''
+            return;
+        }
+        var data = {};
+        data.name = $scope.name;
+        $http({
+            method: 'POST',
+            url: '/users/user',
+            data: data
+        }).success(function(data) {
+            if(data.success) {
+                $scope.user = data.data;
+            }
+            console.log(data);
+        })
+    });
+    $scope.updateUser = function() {
+        if(!$scope.user.gender) {
+            $scope.user.gender = 'male';
+        }
+        console.log($scope.user);
+        $http({
+            method:'POST',
+            url:'/users/updateUser',
+            data: $scope.user
+        }).success(function(data) {
+            if(data.success) {
+                console.log('保存成功')
+            }
+            console.log(data)
+        })
 
+    }
+
+
+})
 timetrip.controller('home', function($scope,$http) {
     console.log('主页')
     $scope.rootname = '邓志阳'

@@ -122,6 +122,14 @@ timetrip.config(function($stateProvider,$urlRouterProvider){
             }
         }
     })
+    .state('my',{
+        url:'/my',
+        views:{
+            '':{
+                templateUrl:'tpls/my.html'
+            }
+        }
+    })
 
     $urlRouterProvider.otherwise('/home');
 })

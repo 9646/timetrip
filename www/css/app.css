@@ -28,7 +28,11 @@ body{
 header {
     overflow: hidden;
 }
-
+.portrait {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
 
 /*登录页面*/
 .login section, .signin section{
@@ -85,6 +89,34 @@ header {
 }
 
 /*注册页面*/
+
+/*个人中心*/
+#my {
+    padding-top: 20px;
+}
+#my #preview{
+    width: 100px;
+    height: 100px
+}
+#my #preview img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+#my input{
+    background-color: #333;
+    color: wheat;
+}
+#my #upload{
+    border: solid 1px #666;
+    width: 100px;
+    padding: 3px;
+}
+#my .btn.btn-default{
+    border: solid 1px #666;
+    background-color: #333;
+    color: wheat;    
+}
 
 /*导航*/
 .navigation .nav li{

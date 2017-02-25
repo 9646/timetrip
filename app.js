@@ -20,6 +20,7 @@ var app = express();
 app.use(express.static('www'))
 
 app.use(cookieParser());
+
 app.use(session({
   secret: settings.cookieSecret,
   key: settings.db,
@@ -39,10 +40,9 @@ app.use(function(req, res, next) {
 })
 
 
-
 // 加载模板ejs
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
